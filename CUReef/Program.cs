@@ -6,7 +6,11 @@ namespace CUReef
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
-        }
+            Menus.mainMenu();
+            Menus.readInput();
+
+        }//end of Main()
+
+ 
     }
 }

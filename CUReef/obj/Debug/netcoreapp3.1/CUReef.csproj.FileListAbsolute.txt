@@ -1,0 +1,14 @@
+C:\Users\Lazar Nikolovski\source\repos\CUReef\CUReef\bin\Debug\netcoreapp3.1\CUReef.exe
+C:\Users\Lazar Nikolovski\source\repos\CUReef\CUReef\bin\Debug\netcoreapp3.1\CUReef.deps.json
+C:\Users\Lazar Nikolovski\source\repos\CUReef\CUReef\bin\Debug\netcoreapp3.1\CUReef.runtimeconfig.json
+C:\Users\Lazar Nikolovski\source\repos\CUReef\CUReef\bin\Debug\netcoreapp3.1\CUReef.runtimeconfig.dev.json
+C:\Users\Lazar Nikolovski\source\repos\CUReef\CUReef\bin\Debug\netcoreapp3.1\CUReef.dll
+C:\Users\Lazar Nikolovski\source\repos\CUReef\CUReef\bin\Debug\netcoreapp3.1\CUReef.pdb
+C:\Users\Lazar Nikolovski\source\repos\CUReef\CUReef\obj\Debug\netcoreapp3.1\CUReef.csproj.AssemblyReference.cache
+C:\Users\Lazar Nikolovski\source\repos\CUReef\CUReef\obj\Debug\netcoreapp3.1\CUReef.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Lazar Nikolovski\source\repos\CUReef\CUReef\obj\Debug\netcoreapp3.1\CUReef.AssemblyInfoInputs.cache
+C:\Users\Lazar Nikolovski\source\repos\CUReef\CUReef\obj\Debug\netcoreapp3.1\CUReef.AssemblyInfo.cs
+C:\Users\Lazar Nikolovski\source\repos\CUReef\CUReef\obj\Debug\netcoreapp3.1\CUReef.csproj.CoreCompileInputs.cache
+C:\Users\Lazar Nikolovski\source\repos\CUReef\CUReef\obj\Debug\netcoreapp3.1\CUReef.dll
+C:\Users\Lazar Nikolovski\source\repos\CUReef\CUReef\obj\Debug\netcoreapp3.1\CUReef.pdb
+C:\Users\Lazar Nikolovski\source\repos\CUReef\CUReef\obj\Debug\netcoreapp3.1\CUReef.genruntimeconfig.cache
