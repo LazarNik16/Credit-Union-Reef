@@ -7,7 +7,6 @@ namespace CUReef
         static void Main(string[] args)
         {
             Menus.mainMenu();
-            Menus.readInput();
 
         }//end of Main()
 
