@@ -4,7 +4,7 @@ using System.Text;
 
 namespace CUReef
 {
-    class Menus
+    public class Menus
     {
         public static void mainMenu()
         {
@@ -67,7 +67,7 @@ namespace CUReef
             Console.WriteLine("Please select from the following optins\n");
             Console.WriteLine("1. Open a New Checking Account");
             Console.WriteLine("2. Check Balance");
-            Console.WriteLine("3. Add Fund to the Balance");
+            Console.WriteLine("3. Add Fund to the Account");
             Console.WriteLine("4. Withdrawal from the balance");
             Console.WriteLine("5. Close an Account");
             Console.WriteLine("6. Return to the Main Menu");
@@ -93,7 +93,7 @@ namespace CUReef
 
                     if (selectionChecking == 1)
                     {
-
+                        MenuInput.openCheckingAccount();
                     }
                     else if (selectionChecking == 2)
                     {

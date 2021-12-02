@@ -1,8 +1,18 @@
 {
   "version": 2,
-  "dgSpecHash": "3NAURnQZLVOYUFVG9ebXSYzoRxNtM+9xL7Bi1t5OGp8BL2NK/+pK/jCMmBRsnIy3ocrvu4/I+qHWepIlSJdMnQ==",
+  "dgSpecHash": "WCiZXvUsoqYTG67KU5xe1gdmj18+li58dhU8O0cUuM/Rd6wsEw6GnW7++V3D1L3icBGeg2H4LHBuumMxBZZSoQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\Lazar Nikolovski\\source\\repos\\CUReef\\CUReef\\CUReef.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Lazar Nikolovski\\.nuget\\packages\\microsoft.win32.systemevents\\6.0.0\\microsoft.win32.systemevents.6.0.0.nupkg.sha512",
+    "C:\\Users\\Lazar Nikolovski\\.nuget\\packages\\system.configuration.configurationmanager\\6.0.0\\system.configuration.configurationmanager.6.0.0.nupkg.sha512",
+    "C:\\Users\\Lazar Nikolovski\\.nuget\\packages\\system.drawing.common\\6.0.0\\system.drawing.common.6.0.0.nupkg.sha512",
+    "C:\\Users\\Lazar Nikolovski\\.nuget\\packages\\system.memory\\4.5.4\\system.memory.4.5.4.nupkg.sha512",
+    "C:\\Users\\Lazar Nikolovski\\.nuget\\packages\\system.security.accesscontrol\\6.0.0\\system.security.accesscontrol.6.0.0.nupkg.sha512",
+    "C:\\Users\\Lazar Nikolovski\\.nuget\\packages\\system.security.cryptography.protecteddata\\6.0.0\\system.security.cryptography.protecteddata.6.0.0.nupkg.sha512",
+    "C:\\Users\\Lazar Nikolovski\\.nuget\\packages\\system.security.permissions\\6.0.0\\system.security.permissions.6.0.0.nupkg.sha512",
+    "C:\\Users\\Lazar Nikolovski\\.nuget\\packages\\system.security.principal.windows\\5.0.0\\system.security.principal.windows.5.0.0.nupkg.sha512",
+    "C:\\Users\\Lazar Nikolovski\\.nuget\\packages\\system.windows.extensions\\6.0.0\\system.windows.extensions.6.0.0.nupkg.sha512"
+  ],
   "logs": []
 }
