@@ -10,11 +10,17 @@ namespace CUReef
         public int Month { get; set; }
         public int Year { get; set; }
 
-        public DateTime getDOB()
+        public DOB(int year, int month, int day)
         {
-            var birthdate = new DateTime(Day, Month, Year);
-            return birthdate;
+            Year = year; 
+            Month = month;
+            Day = day;
+            
         }
-        
+        public override string ToString()
+        {
+            string obj = $"{Year}-{Month}-{Day}";
+            return obj;
+        }
     }
 }

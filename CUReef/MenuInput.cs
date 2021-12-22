@@ -46,28 +46,23 @@ namespace CUReef
 
             while (!validateSSN(ssn))
             {
-                Console.WriteLine("You must provide a valid SSN");
+                Console.WriteLine("The client SSN must be valid");
                 ssn = Convert.ToInt64(Console.ReadLine());
             }
-
-
-            /*Use this method abouve to validate 
-             * phone number etc!!!*/
-
 
             Console.WriteLine("Enter the client Phone Number (just digits, no hyphens):");
             phone = Convert.ToInt64(Console.ReadLine());
 
-            while (phone < 1111111111 && phone > 9999999999)
+            while(!validatePhone(phone))
             {
-                Console.WriteLine("Provide a valid Phone Number:");
+                Console.WriteLine("The clinet phone number must be valid");
                 phone = Convert.ToInt64(Console.ReadLine());
             }
 
             Console.WriteLine("Enter the client Street Number:");
             strNumber = Convert.ToInt32(Console.ReadLine());
 
-            while (strNumber > 0)
+            while (strNumber < 0)
             {
                 Console.WriteLine("Provide a valid Street number");
                 strNumber = Convert.ToInt32(Console.ReadLine());
@@ -97,7 +92,7 @@ namespace CUReef
             Console.WriteLine("Enter the State (only the state two character code)");
             state = Console.ReadLine().ToUpper();
 
-            while (string.IsNullOrEmpty(state) && state.Length != 2)
+            while (state.Length > 0 && state.Length != 2)
             {
                 Console.WriteLine("Please provide a state, with two digits");
                 state = Console.ReadLine().ToUpper();
@@ -106,7 +101,7 @@ namespace CUReef
             Console.WriteLine("Enter the Zip Code:");
             zipCode = Convert.ToInt32(Console.ReadLine());
 
-            while (zipCode < 00501 && zipCode > 99950)
+            while (zipCode < 00501 || zipCode > 99950)
             {
                 Console.WriteLine("Provide a valid zip code for USA:");
                 zipCode = Convert.ToInt32(Console.ReadLine());
@@ -115,7 +110,7 @@ namespace CUReef
             Console.WriteLine("Ehter the Month of Birth for the client (numbric):");
             monthOfBirth = Convert.ToInt32(Console.ReadLine());
 
-            while (monthOfBirth < 1 && monthOfBirth > 12)
+            while (monthOfBirth < 1 || monthOfBirth > 12)
             {
                 Console.WriteLine("Provide a valid month number, between 1 and 12");
                 monthOfBirth = Convert.ToInt32(Console.ReadLine());
@@ -155,20 +150,25 @@ namespace CUReef
             var current = DateTime.Now;
             int elgForAcct = current.Year - 16;
 
-            while (yearOfBirth > 1900 && yearOfBirth < elgForAcct)
+            while (yearOfBirth < 1940 || !(yearOfBirth < elgForAcct))
             {
                 Console.WriteLine("Check if you enter the year correctly, or the client is not eligible for an account");
             }
 
+            var dob = new DOB(yearOfBirth, monthOfBirth,dayOfBirth);
+            var address = new Address(strNumber, strName, aptNumber, city, state, zipCode);
+            var client = new Client(fname, lname, ssn, phone, dob, address);
+
+            Console.WriteLine(client);
+
+
         }//end of openCheckingAccount()
         public static bool validateSSN(long ssn)
         {
-            long ssnMin = 1111111111;
-            long ssnMax = 9999999999;
+            long ssnMin = 111111111;
+            long ssnMax = 999999999;
 
             LongValidator validate = new LongValidator(ssnMin, ssnMax, false);
-
-            // Console.WriteLine("Can validate {0}", validate.CanValidate(ssn.GetType()));
 
             try
             {
@@ -179,6 +179,23 @@ namespace CUReef
             {
                 return false;
             }
-        }
+        }//end of validateSSN
+        public static bool validatePhone(long phone)
+        {
+            long ssnMin = 1111111111;
+            long ssnMax = 9999999999;
+
+            LongValidator validate = new LongValidator(ssnMin, ssnMax, false);
+
+            try
+            {
+                validate.Validate(phone);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }//end of validatePhone()
     }//end of class MenuInput
-}
+}//end of namespace

@@ -29,3 +29,9 @@ C:\Users\Lazar Nikolovski\source\repos\CUReef\CUReef\bin\Debug\netcoreapp3.1\run
 C:\Users\Lazar Nikolovski\source\repos\CUReef\CUReef\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Security.Principal.Windows.dll
 C:\Users\Lazar Nikolovski\source\repos\CUReef\CUReef\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.1\System.Windows.Extensions.dll
 C:\Users\Lazar Nikolovski\source\repos\CUReef\CUReef\obj\Debug\netcoreapp3.1\CUReef.csproj.CopyComplete
+C:\Users\Lazar Nikolovski\source\repos\CUReef\CUReef\bin\Debug\netcoreapp3.1\System.Data.SqlClient.dll
+C:\Users\Lazar Nikolovski\source\repos\CUReef\CUReef\bin\Debug\netcoreapp3.1\runtimes\win-arm64\native\sni.dll
+C:\Users\Lazar Nikolovski\source\repos\CUReef\CUReef\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\sni.dll
+C:\Users\Lazar Nikolovski\source\repos\CUReef\CUReef\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\sni.dll
+C:\Users\Lazar Nikolovski\source\repos\CUReef\CUReef\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\Lazar Nikolovski\source\repos\CUReef\CUReef\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
