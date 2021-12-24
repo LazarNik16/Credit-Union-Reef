@@ -24,6 +24,8 @@ namespace CUReef
         }
         public override string ToString()
         {
+            addAddressToDatabase();
+
             if (AptNum == null)
             {
                 return $"{StreetNum} {StreetName}\n {City}, {State} {ZipCode}";
@@ -33,6 +35,12 @@ namespace CUReef
                 return $"{StreetNum} {StreetName}\n Apt. {AptNum}\n {City}, {State} {ZipCode}";
             }
             
+        }
+        public void addAddressToDatabase()
+        {
+            string addAddress = "INSERT INTO Addresses (StrNumber, StrName, AptNumber, City, State, ZipCode) VALUES (@StreetNum, @StreetName, @AptNum, @City, @State, @ZipCode) SELECT SCOPE_IDENTITY()";
+            var dbm = new DBManager();
+            dbm.addAddress(addAddress, this);
         }
     }
 }

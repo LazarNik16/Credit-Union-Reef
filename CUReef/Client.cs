@@ -11,37 +11,34 @@ namespace CUReef
         public string Lname { get; set; }
         public long SSN { get; set; }
         public long Phone { get; set; }
-
-        DOB dob { get; set; }
+        public string Dob { get; }
         Address address { get; set; }
 
+        public Client() { }
         public Client(string fname, string lname, long ssn, long phone, DOB dob, Address address)
         {
             Fname = fname;
             Lname = lname;
             SSN = ssn;
             Phone = phone;
-            this.dob = dob;
+            this.Dob = dob.ToString();
             this.address = address;
         }
 
         //Displaying the data input for the client before writing to the DB
         public override string ToString()
         {
-            string obj = $"Client info: \nName: {Fname} {Lname} \nSSN: {SSN} \nPhone number:{Phone} \nDate of birth:{dob.ToString()} \nAddress: {address.ToString()}";
-            addClientToDB();
-            return obj;
+            string str = $"Client info: \nName: {Fname} {Lname} \nSSN: {SSN} \nPhone number:{Phone} \nDate of birth:{Dob.ToString()} \nAddress: {address.ToString()}";
+            addClientToDatabase();
+            return str;
             
 
         }//end on to String moethod
-        public void addClientToDB()
+        public void addClientToDatabase()
         {
-            Client client = new Client(Fname, Lname, SSN, Phone, dob, address);
-
-            string addClient = "INSERT INTO Clients (Fname, Lname, SSN, DOB, Phone) VALUES (@Fname, @Lname, @SSN, @dob, @Phone)"; 
-            DBManager dbm = new DBManager();
-            dbm.executeQuery(addClient, client);
-
+            string addClient = "INSERT INTO Clients (Fname, Lname, SSN, DOB, Phone) VALUES (@Fname, @Lname, @SSN, @dob, @Phone) SELECT SCOPE_IDENTITY()";
+            var dbm = new DBManager();
+            dbm.addClient(addClient, this);
         }
 
     }

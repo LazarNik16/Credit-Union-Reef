@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Text;
 
 namespace CUReef
 {
@@ -11,46 +9,61 @@ namespace CUReef
 
         private SqlConnection connection;
         private SqlCommand cmd;
-        private DataTable dt;
+        string pkClients;
+        string pkAddress;
 
         public DBManager()
         {
             connection = new SqlConnection(@"Server=LAZAR-DESKTOP\SQLEXPRESS;Database=DBReef;Trusted_Connection=True;");
-            //cmd = new SqlCommand("", connection);
-            dt = new DataTable();
 
         }//end of DBManager constructor 
 
-        public DataTable executeDataTable(string sqlStatement)
-        {
-            connection.Open();
-            cmd.CommandText = sqlStatement;
-            dt.Clear();
-            dt.Load(cmd.ExecuteReader());
-            connection.Close();
-
-            return dt.Copy();
-
-        }//end of executeDataTable function
-
-        public void executeQuery(string sqlStatement, string fname, string lname, long ssn, long phone, DOB dob)
+        public void addClient(string sqlStatement, Client client)
         {
             try
             {
+                
+                cmd = new SqlCommand(sqlStatement, this.connection);
+
                 connection.Open();
-                Console.Write($"Connected to the DB\n");
 
-                cmd = new SqlCommand(sqlStatement, connection);
-                cmd.Parameters.Add("@Fname")
+                cmd.Parameters.AddWithValue("@Fname", client.Fname);
+                cmd.Parameters.AddWithValue("@Lname", client.Lname);
+                cmd.Parameters.AddWithValue("@SSN", client.SSN);
+                cmd.Parameters.AddWithValue("@DOB", client.Dob);
+                cmd.Parameters.AddWithValue("@Phone", client.Phone);
 
+                SqlDataReader reader = cmd.ExecuteReader();
+                reader.Read();
+                pkClients = reader[0].ToString();
 
-
-
-
-                int num =cmd.ExecuteNonQuery();
-
-                Console.WriteLine(num + " Record Added to the database");
                 connection.Close();
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error code: " + e);
+            }
+        }//end of addClientToDB function
+        public void addAddress(string stmAddAddress, Address address)
+        {
+            try
+            {
+                cmd = new SqlCommand(stmAddAddress, this.connection);
+
+                connection.Open();
+
+                cmd.Parameters.AddWithValue("StrNumber", address.StreetNum);
+                cmd.Parameters.AddWithValue("StrName", address.StreetName);
+                cmd.Parameters.AddWithValue("AptNumber", address.AptNum);
+                cmd.Parameters.AddWithValue("City", address.City);
+                cmd.Parameters.AddWithValue("State", address.State);
+                cmd.Parameters.AddWithValue("ZipCode", address.ZipCode);
+                cmd.Parameters.AddWithValue("ClientID", Int32.Parse(pkClients));
+
+                SqlDataReader reader = cmd.ExecuteReader();
+                reader.Read();
+                pkAddress = reader[0].ToString();
 
             }
             catch (Exception e)
