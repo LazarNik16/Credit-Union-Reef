@@ -9,8 +9,8 @@ namespace CUReef
 
         private SqlConnection connection;
         private SqlCommand cmd;
-        string pkClients;
-        string pkAddress;
+        int pkClients;
+        int pkAddress;
 
         public DBManager()
         {
@@ -22,54 +22,59 @@ namespace CUReef
         {
             try
             {
-                
                 cmd = new SqlCommand(sqlStatement, this.connection);
-
-                connection.Open();
-
+                
                 cmd.Parameters.AddWithValue("@Fname", client.Fname);
                 cmd.Parameters.AddWithValue("@Lname", client.Lname);
                 cmd.Parameters.AddWithValue("@SSN", client.SSN);
                 cmd.Parameters.AddWithValue("@DOB", client.Dob);
                 cmd.Parameters.AddWithValue("@Phone", client.Phone);
 
-                SqlDataReader reader = cmd.ExecuteReader();
-                reader.Read();
-                pkClients = reader[0].ToString();
-
+                connection.Open();
+                pkClients = Convert.ToInt32(cmd.ExecuteScalar());
                 connection.Close();
 
+
+                Console.WriteLine("The PK of the new entry is "+ pkClients);
             }
             catch (Exception e)
             {
                 Console.WriteLine("Error code: " + e);
             }
         }//end of addClientToDB function
-        public void addAddress(string stmAddAddress, Address address)
+        public void addAddress(string strAddAddress, Address address)
         {
             try
             {
-                cmd = new SqlCommand(stmAddAddress, this.connection);
+                cmd = new SqlCommand(strAddAddress, this.connection);
+                Console.WriteLine("The PK of the CLient Table is " + pkClients + " From the AddAddress function");
 
-                connection.Open();
+                cmd.Parameters.AddWithValue("@StrNumber", address.StreetNum);
+                cmd.Parameters.AddWithValue("@StrName", address.StreetName);
+                cmd.Parameters.AddWithValue("@AptNumber", address.AptNum);
+                cmd.Parameters.AddWithValue("@City", address.City);
+                cmd.Parameters.AddWithValue("@USState", address.State);
+                cmd.Parameters.AddWithValue("@ZipCode", address.ZipCode);
+                cmd.Parameters.AddWithValue("@ClientID", pkClients);
 
-                cmd.Parameters.AddWithValue("StrNumber", address.StreetNum);
-                cmd.Parameters.AddWithValue("StrName", address.StreetName);
-                cmd.Parameters.AddWithValue("AptNumber", address.AptNum);
-                cmd.Parameters.AddWithValue("City", address.City);
-                cmd.Parameters.AddWithValue("State", address.State);
-                cmd.Parameters.AddWithValue("ZipCode", address.ZipCode);
-                cmd.Parameters.AddWithValue("ClientID", Int32.Parse(pkClients));
+                connection.Open();             
+                pkAddress = Convert.ToInt32(cmd.ExecuteScalar());
+                connection.Close();
 
-                SqlDataReader reader = cmd.ExecuteReader();
-                reader.Read();
-                pkAddress = reader[0].ToString();
+                Console.WriteLine("The PK of the address is: " + pkAddress);
 
             }
             catch (Exception e)
             {
                 Console.WriteLine("Error code: " + e);
             }
+        }
+        public int getPkClient()
+        {
+
+            int pkCl;
+
+            return pkCl;
         }
 
     }//end of DBManager class

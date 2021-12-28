@@ -12,31 +12,29 @@ namespace CUReef
         public long SSN { get; set; }
         public long Phone { get; set; }
         public string Dob { get; }
-        Address address { get; set; }
 
         public Client() { }
-        public Client(string fname, string lname, long ssn, long phone, DOB dob, Address address)
+        public Client(string fname, string lname, long ssn, long phone, DOB dob)
         {
             Fname = fname;
             Lname = lname;
             SSN = ssn;
             Phone = phone;
             this.Dob = dob.ToString();
-            this.address = address;
         }
 
         //Displaying the data input for the client before writing to the DB
         public override string ToString()
         {
-            string str = $"Client info: \nName: {Fname} {Lname} \nSSN: {SSN} \nPhone number:{Phone} \nDate of birth:{Dob.ToString()} \nAddress: {address.ToString()}";
-            addClientToDatabase();
+            string str = $"Client info: \nName: {Fname} {Lname} \nSSN: {SSN} \nPhone number:{Phone} \nDate of birth:{Dob.ToString()}\n";
+            //addClientToDatabase();
             return str;
             
 
         }//end on to String moethod
         public void addClientToDatabase()
         {
-            string addClient = "INSERT INTO Clients (Fname, Lname, SSN, DOB, Phone) VALUES (@Fname, @Lname, @SSN, @dob, @Phone) SELECT SCOPE_IDENTITY()";
+            string addClient = "INSERT INTO Clients (Fname, Lname, SSN, DOB, Phone) VALUES (@Fname, @Lname, @SSN, @dob, @Phone) SELECT CAST(SCOPE_IDENTITY() as INT)";
             var dbm = new DBManager();
             dbm.addClient(addClient, this);
         }

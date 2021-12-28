@@ -6,14 +6,15 @@ namespace CUReef
 {
     public class Address
     {
-        public int StreetNum { get; set; }
+        public string StreetNum { get; set; }
         public string StreetName { get; set; }
         public string AptNum { get; set; }
         public string City { get; set; }
         public string State { get; set; }
         public int ZipCode { get; set; }
 
-        public Address(int strNum, string strName, string aptNum, string city, string state, int zipCode)
+        public Address () { }
+        public Address(string strNum, string strName, string aptNum, string city, string state, int zipCode)
         {
             StreetNum = strNum;
             StreetName = strName;
@@ -24,7 +25,7 @@ namespace CUReef
         }
         public override string ToString()
         {
-            addAddressToDatabase();
+            //addAddressToDatabase();
 
             if (AptNum == null)
             {
@@ -38,7 +39,7 @@ namespace CUReef
         }
         public void addAddressToDatabase()
         {
-            string addAddress = "INSERT INTO Addresses (StrNumber, StrName, AptNumber, City, State, ZipCode) VALUES (@StreetNum, @StreetName, @AptNum, @City, @State, @ZipCode) SELECT SCOPE_IDENTITY()";
+            string addAddress = "INSERT INTO Addresses (StrNumber, StrName, AptNumber, City, USState, ZipCode, ClientID) VALUES (@StrNumber, @StrName, @AptNumber, @City, @USState, @ZipCode, @ClientID) SELECT CAST(SCOPE_IDENTITY() as INT)";
             var dbm = new DBManager();
             dbm.addAddress(addAddress, this);
         }
