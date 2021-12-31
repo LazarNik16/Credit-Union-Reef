@@ -20,6 +20,7 @@ namespace CUReef
             int monthOfBirth;
             int dayOfBirth;
             int yearOfBirth;
+            decimal addingBalance;
 
             Console.WriteLine("Enter the Client First Name:");
             fname = Console.ReadLine();
@@ -158,10 +159,15 @@ namespace CUReef
 
             var dob = new DOB(yearOfBirth, monthOfBirth, dayOfBirth);
             var client = new Client(fname, lname, ssn, phone, dob);
-            var address = new Address(strNumber, strName, aptNumber, city, state, zipCode);
-            
-            client.addClientToDatabase();
+            var clientID = client.addClientToDatabase();
+            var checkingPK = client.createCheckingAccount();
+            var address = new Address(strNumber, strName, aptNumber, city, state, zipCode, clientID);
             address.addAddressToDatabase();
+            addingBalance = addBalance();
+            var ckAcctTransaction = new CheckingTransaction(addingBalance, addingBalance, checkingPK);
+            ckAcctTransaction.openCheckingAccount();
+            
+            
             
         }//end of openCheckingAccount()
         public static bool validateSSN(long ssn)
@@ -198,5 +204,12 @@ namespace CUReef
                 return false;
             }
         }//end of validatePhone()
+        public static decimal addBalance()
+        {
+            Console.WriteLine("Add balance to the account amaount: ");
+            decimal addBalance = Convert.ToDecimal(Console.ReadLine());
+            return addBalance;
+
+        }//end of the add AddBalance function
     }//end of class MenuInput
 }//end of namespace

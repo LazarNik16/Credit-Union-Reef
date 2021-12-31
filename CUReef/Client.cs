@@ -11,9 +11,12 @@ namespace CUReef
         public string Lname { get; set; }
         public long SSN { get; set; }
         public long Phone { get; set; }
-        public string Dob { get; }
+        public string Dob { get; set;  }
 
-        public Client() { }
+        DBManager dbm = new DBManager();
+        int clientPK;
+        int checkingAcctID = 0;
+
         public Client(string fname, string lname, long ssn, long phone, DOB dob)
         {
             Fname = fname;
@@ -27,17 +30,27 @@ namespace CUReef
         public override string ToString()
         {
             string str = $"Client info: \nName: {Fname} {Lname} \nSSN: {SSN} \nPhone number:{Phone} \nDate of birth:{Dob.ToString()}\n";
-            //addClientToDatabase();
             return str;
             
 
-        }//end on to String moethod
-        public void addClientToDatabase()
+        }//end on ToString method
+        public int addClientToDatabase()
         {
+            
             string addClient = "INSERT INTO Clients (Fname, Lname, SSN, DOB, Phone) VALUES (@Fname, @Lname, @SSN, @dob, @Phone) SELECT CAST(SCOPE_IDENTITY() as INT)";
-            var dbm = new DBManager();
-            dbm.addClient(addClient, this);
+            clientPK = dbm.addClient(addClient, this);
+
+            return clientPK;
+            
         }
+        public int createCheckingAccount()
+        {
+            string addCheckingAccount = "INSERT INTO CheckingAccounts (ClientID) VALUES (@ClientID) SELECT CAST(SCOPE_IDENTITY() as INT)";
+            checkingAcctID = dbm.addCheckingAccount(addCheckingAccount, clientPK);
+
+            return checkingAcctID;
+
+        }//end of createCheckingAccount function
 
     }
 }
