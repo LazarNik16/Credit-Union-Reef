@@ -93,23 +93,23 @@ namespace CUReef
 
                     if (selectionChecking == 1)
                     {
-                        MenuInput.openCheckingAccount();
+                        CheckingMenu.createCheckingAccount();
                     }
                     else if (selectionChecking == 2)
                     {
-
+                        CheckingMenu.checkCheckingBalance();
                     }
                     else if (selectionChecking == 3)
                     {
-
-                    }
+                        CheckingMenu.addBalanceChecking();
+                }
                     else if (selectionChecking == 4)
                     {
-
+                        CheckingMenu.removeBalanceChecking();
                     }
                     else if (selectionChecking == 5)
                     {
-
+                        CheckingMenu.closeCheckingAccount();
                     }
                     else if (selectionChecking == 6)
                     {
@@ -155,7 +155,7 @@ namespace CUReef
 
                 if (selectionSavings == 1)
                 {
-
+                    SavingsMenu.createSavingsAccount();
                 }
                 else if (selectionSavings == 2)
                 {

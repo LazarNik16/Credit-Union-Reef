@@ -4,7 +4,6 @@ C:\Users\Lazar Nikolovski\source\repos\CUReef\CUReef\bin\Debug\netcoreapp3.1\CUR
 C:\Users\Lazar Nikolovski\source\repos\CUReef\CUReef\bin\Debug\netcoreapp3.1\CUReef.runtimeconfig.dev.json
 C:\Users\Lazar Nikolovski\source\repos\CUReef\CUReef\bin\Debug\netcoreapp3.1\CUReef.dll
 C:\Users\Lazar Nikolovski\source\repos\CUReef\CUReef\bin\Debug\netcoreapp3.1\CUReef.pdb
-C:\Users\Lazar Nikolovski\source\repos\CUReef\CUReef\obj\Debug\netcoreapp3.1\CUReef.csproj.AssemblyReference.cache
 C:\Users\Lazar Nikolovski\source\repos\CUReef\CUReef\obj\Debug\netcoreapp3.1\CUReef.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\Lazar Nikolovski\source\repos\CUReef\CUReef\obj\Debug\netcoreapp3.1\CUReef.AssemblyInfoInputs.cache
 C:\Users\Lazar Nikolovski\source\repos\CUReef\CUReef\obj\Debug\netcoreapp3.1\CUReef.AssemblyInfo.cs
@@ -35,3 +34,4 @@ C:\Users\Lazar Nikolovski\source\repos\CUReef\CUReef\bin\Debug\netcoreapp3.1\run
 C:\Users\Lazar Nikolovski\source\repos\CUReef\CUReef\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\sni.dll
 C:\Users\Lazar Nikolovski\source\repos\CUReef\CUReef\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
 C:\Users\Lazar Nikolovski\source\repos\CUReef\CUReef\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\Lazar Nikolovski\source\repos\CUReef\CUReef\obj\Debug\netcoreapp3.1\CUReef.csproj.AssemblyReference.cache

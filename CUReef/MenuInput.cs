@@ -1,11 +1,14 @@
 ﻿using System;
+using System.Collections;
 using System.Configuration;
 
 namespace CUReef
 {
     public class MenuInput
     {
-        public static void openCheckingAccount()
+
+
+        public static Queue openAccount()
         {
             string fname;
             string lname;
@@ -20,7 +23,11 @@ namespace CUReef
             int monthOfBirth;
             int dayOfBirth;
             int yearOfBirth;
-            decimal addingBalance;
+            //decimal balance;
+
+            Queue qone = new Queue();
+
+            Console.Clear();
 
             Console.WriteLine("Enter the Client First Name:");
             fname = Console.ReadLine();
@@ -156,20 +163,36 @@ namespace CUReef
             //    yearOfBirth = Convert.ToInt32(Console.ReadLine());
             //}
 
+            Console.Clear();
 
+            qone.Enqueue(yearOfBirth);
+            qone.Enqueue(monthOfBirth);
+            qone.Enqueue(dayOfBirth);
+            qone.Enqueue(fname);
+            qone.Enqueue(lname);
+            qone.Enqueue(ssn);
+            qone.Enqueue(phone);
+            qone.Enqueue(strNumber);
+            qone.Enqueue(strName);
+            qone.Enqueue(aptNumber);
+            qone.Enqueue(city);
+            qone.Enqueue(state);
+            qone.Enqueue(zipCode);
+
+ /*
             var dob = new DOB(yearOfBirth, monthOfBirth, dayOfBirth);
             var client = new Client(fname, lname, ssn, phone, dob);
             var clientID = client.addClientToDatabase();
             var checkingPK = client.createCheckingAccount();
             var address = new Address(strNumber, strName, aptNumber, city, state, zipCode, clientID);
             address.addAddressToDatabase();
-            addingBalance = addBalance();
-            var ckAcctTransaction = new CheckingTransaction(addingBalance, addingBalance, checkingPK);
+            balance = addBalance();
+            var ckAcctTransaction = new CheckingTransaction(balance, balance, checkingPK);
             ckAcctTransaction.openCheckingAccount();
-            
-            
-            
-        }//end of openCheckingAccount()
+ */
+            return qone;
+
+        }//end of openAccount() function
         public static bool validateSSN(long ssn)
         {
             long ssnMin = 111111111;
@@ -204,12 +227,69 @@ namespace CUReef
                 return false;
             }
         }//end of validatePhone()
-        public static decimal addBalance()
+        public static (int AcctID, decimal AddBalance) addBalance()
         {
-            Console.WriteLine("Add balance to the account amaount: ");
-            decimal addBalance = Convert.ToDecimal(Console.ReadLine());
-            return addBalance;
+            
+            Console.Clear();
+            Console.WriteLine("Provide  the account number: ");
+            int acctID = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine("Add balance to the account: ");
+            string temp = Console.ReadLine();
+            decimal addBal;
+            bool parseInput = decimal.TryParse(temp, out addBal);
+            
+            if (!parseInput)
+            {
+                Console.WriteLine("Please provide a valid balance input");
+                addBalance();
+            }
+            
+            return (acctID, addBal);
 
         }//end of the add AddBalance function
+        public static int CheckBalance()
+        {
+            Console.Clear();
+
+            //reading input from the console
+            Console.WriteLine("Please provide the account number: ");
+            string tempRead = Console.ReadLine();
+            int tempAcct;
+                           
+            bool parseInput = int.TryParse(tempRead, out tempAcct);
+            
+            if (!parseInput)
+            {
+                Console.WriteLine("Please provide a numberic input");
+                CheckBalance();
+            }
+            return tempAcct;
+
+        }//end of the checkBalance function
+        public static (int AcctID, decimal removeBal) removeBalance()
+        {
+            Console.Clear();
+
+            Console.WriteLine("Provide  the account number: ");
+            int acctID = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine("Remove balance to the account: ");
+            decimal balance = Convert.ToDecimal(Console.ReadLine());
+            decimal removeBal = Decimal.Negate(balance);
+
+            return (acctID, removeBal);
+
+        }//end of the removeBalance function 
+        public static int closeAccount()
+        {
+            Console.Clear();
+
+            Console.WriteLine("Provide the account number for the account to be deleted: ");
+            int acctID = Convert.ToInt32(Console.ReadLine());
+
+            return acctID;
+
+        }//end of closeCheckingAccount function 
     }//end of class MenuInput
 }//end of namespace

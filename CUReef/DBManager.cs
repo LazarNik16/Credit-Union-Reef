@@ -10,8 +10,9 @@ namespace CUReef
         private SqlConnection connection;
         private SqlCommand cmd;
         int pkClients = 0;
-        int pkAddress = 0;
         int pkCheckingAccount = 0;
+        int pkSavingsaccount = 0;
+        decimal acctBalance = 0;
 
         public DBManager()
         {
@@ -21,7 +22,7 @@ namespace CUReef
 
         public int addClient(string sqlStatement, Client client)
         {
- 
+
             try
             {
                 cmd = new SqlCommand(sqlStatement, this.connection);
@@ -60,7 +61,7 @@ namespace CUReef
                 cmd.Parameters.AddWithValue("@ClientID", address.ClientID);
 
                 connection.Open();             
-                pkAddress = Convert.ToInt32(cmd.ExecuteScalar());
+                cmd.ExecuteScalar();
                 connection.Close();
 
             }
@@ -71,9 +72,6 @@ namespace CUReef
         }//end of the addAddress function
         public int addCheckingAccount(string addCheckingAccount, int clientPK)
         {
-
-            //Console.WriteLine("Dali stiga ovde vo addCheckingAccount function - DBManager");
-
             try
             {
                 cmd = new SqlCommand(addCheckingAccount, this.connection);
@@ -108,7 +106,89 @@ namespace CUReef
             {
                 Console.WriteLine("Error code: " + e);
             }
-        }//end of the openAccount function 
 
+        }//end of the openAccount function 
+        public decimal GetCheckingBalance(string balanceAccount, int acctPk)
+        {
+            try
+            {
+                cmd = new SqlCommand(balanceAccount, this.connection);
+
+                cmd.Parameters.AddWithValue("@CkAcctID", acctPk);
+
+                connection.Open();
+                acctBalance = Convert.ToDecimal(cmd.ExecuteScalar());
+                connection.Close();
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error " + e);
+            }
+            return acctBalance;
+            
+        }//end of the getCheckingBalance function
+        public void addFundsToCheckingAccount(string addBalance, decimal adding, decimal newBalance, int acctID)
+        {
+            try
+            {
+                cmd = new SqlCommand(addBalance, this.connection);
+
+                cmd.Parameters.AddWithValue("@CkTransAmount", adding);
+                cmd.Parameters.AddWithValue("@CkTransBalance", newBalance);
+                cmd.Parameters.AddWithValue("@CkAcctID", acctID);
+
+                connection.Open();
+                cmd.ExecuteScalar();
+                connection.Close();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error " + e);
+            }
+        }//end of addFundsToCheckingAccount function
+        public void closeCheckingAccount(string closeAcct, decimal balance, int acctID)
+        {
+
+            try
+            {
+                cmd = new SqlCommand(closeAcct, this.connection);
+
+                cmd.Parameters.AddWithValue("@CkAcctID", acctID);
+                cmd.Parameters.AddWithValue("@CkTransAmount", balance);
+                cmd.Parameters.AddWithValue("@CkTransBalance", 0);
+
+                connection.Open();
+                cmd.ExecuteScalar();
+                connection.Close();
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error " + e);
+            }
+        }//end of close checking account
+        public int addSavingsAccount(string addSavingsAccount, int clientPK, double interestRate)
+        {
+            try
+            {
+                cmd = new SqlCommand(addSavingsAccount, this.connection);
+
+                cmd.Parameters.AddWithValue("@ClientID", clientPK);
+                cmd.Parameters.AddWithValue("@InterestRate", interestRate);
+
+                connection.Open();
+                pkSavingsaccount = Convert.ToInt32(cmd.ExecuteScalar());
+                connection.Close();
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error " + e);
+            }
+
+            return pkSavingsaccount;
+
+        }//end of addSavingsAccount
     }//end of DBManager class
-}//end of namespaceCUREEF
+}//end of namespace CUREEF

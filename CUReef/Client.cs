@@ -16,6 +16,8 @@ namespace CUReef
         DBManager dbm = new DBManager();
         int clientPK;
         int checkingAcctID = 0;
+        int savingAcctID = 0;
+        double interestRate = 1.1;
 
         public Client(string fname, string lname, long ssn, long phone, DOB dob)
         {
@@ -51,6 +53,12 @@ namespace CUReef
             return checkingAcctID;
 
         }//end of createCheckingAccount function
+        public int createSavingsAccount()
+        {
+            string addSavingsAccount = "INSERT INTO SavingsAccounts (ClientID, InterestRate) VALUES (@CLientID, @InterestRate) SELECT CAST(SCOPE_IDENTITY() AS INT)";
+            savingAcctID = dbm.addSavingsAccount(addSavingsAccount, clientPK, interestRate);
 
-    }
-}
+            return savingAcctID;
+        }
+    }//end of Client Class
+}//end of CUReef namespace
