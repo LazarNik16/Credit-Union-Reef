@@ -9,8 +9,8 @@ namespace CUReef
     {
         public static void createCheckingAccount()
         {
-               Queue qtwo = MenuInput.openAccount();
 
+               Queue qtwo = MenuInput.openAccount();
                string fname;
                string lname;
                long ssn;
@@ -62,8 +62,8 @@ namespace CUReef
             var address = new Address(strNumber, strName, aptNumber, city, state, zipCode, clientID);
             address.addAddressToDatabase();
             balance = 0.0m;
-            var ckAcctTransaction = new CheckingTransaction(balance, balance, checkingPK);
-            ckAcctTransaction.openCheckingAccount();
+            var svgTransaction = new SavingsTransaction(balance, balance, checkingPK);
+            svgTransaction.openSavingsAccount();
 
         }//end of openCheckingAccount function
         public static void checkCheckingBalance()
@@ -74,9 +74,11 @@ namespace CUReef
             decimal bal = checkingAccount.getCheckingAccountBalance(acct);
 
             Console.WriteLine($"The Account number: {acct} has a balance of {bal}");
-        }
+
+        }//end of checkCheckingAccountBalance function
         public static void addBalanceChecking()
         {
+
             (int acctID, decimal addBal) = MenuInput.addBalance();
 
             var checkingAccount = new CheckingTransaction();
@@ -91,12 +93,14 @@ namespace CUReef
         }//end of addBalanceChecking function 
         public static void removeBalanceChecking()
         {
+
             (int acctID, decimal removeBal) = MenuInput.removeBalance();
 
             var checkingAccount = new CheckingTransaction();
             checkingAccount.addFundToAccount(removeBal, acctID);
             decimal tempBal = checkingAccount.getCheckingAccountBalance(acctID);
             Console.WriteLine($"The new balance on the account number: {acctID} is: ${tempBal}");
+
         }//end of the removeBalanceChecking function
         public static void closeCheckingAccount()
         {

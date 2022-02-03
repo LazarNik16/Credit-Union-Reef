@@ -13,10 +13,10 @@ namespace CUReef
             Console.WriteLine("1. Checking Account");
             Console.WriteLine("2. Savings Account");
             Console.WriteLine("3. Loan Menu");
-            Console.WriteLine("4. Serach a Client\n");
+            Console.WriteLine("4. Serach\n");
             readInput();
 
-        }//end of mainMenu()
+        }//end of mainMenu function
         public static void readInput()
         {
             string readMenu;
@@ -60,7 +60,7 @@ namespace CUReef
                     readInput();
                 }
             }
-        }//end of readInput()
+        }//end of readInput function
         public static void menuChecking()
         {
             Console.WriteLine("Checking Account Menu");
@@ -73,7 +73,7 @@ namespace CUReef
             Console.WriteLine("6. Return to the Main Menu");
             readCheckingInput();
 
-        }//end of menuChecking()
+        }//end of menuChecking function
         static void readCheckingInput()
         {
             string readCheckingMenu;
@@ -123,7 +123,7 @@ namespace CUReef
                         menuChecking();
                     }
             }
-        }//end of readCheckingInput()
+        }//end of readCheckingInput function
         public static void menuSavings()
         {
             Console.WriteLine("Savings Account Menu\n");
@@ -136,7 +136,7 @@ namespace CUReef
             Console.WriteLine("6. Return to the Main Menu");
             readSavingsInput();
 
-        }//end of menuSavings()
+        }//end of menuSavings function
         public static void readSavingsInput()
         {
             string readSavingsMenu;
@@ -159,19 +159,19 @@ namespace CUReef
                 }
                 else if (selectionSavings == 2)
                 {
-
+                    SavingsMenu.checkSavingsBalance();
                 }
                 else if (selectionSavings == 3)
                 {
-
+                    SavingsMenu.addBalanceSavings();
                 }
                 else if (selectionSavings == 4)
                 {
-
+                    SavingsMenu.removeBalanceSavings();
                 }
                 else if (selectionSavings == 5)
                 {
-
+                    SavingsMenu.closeSavingsAccount();
                 }
                 else if (selectionSavings == 6)
                 {
@@ -185,7 +185,7 @@ namespace CUReef
                     menuSavings();
                 }
             }
-        }//end of readSavingsInput()
+        }//end of readSavingsInput function
         public static void menuLoan()
         {
             Console.WriteLine("Loan Menu");
@@ -196,7 +196,7 @@ namespace CUReef
             Console.WriteLine("4. Return to the Main Menu");
             readLoanInput();
 
-        }//end of menuLoan()
+        }//end of menuLoan function
         public static void readLoanInput()
         {
             string readLoanMenu;
@@ -215,15 +215,15 @@ namespace CUReef
 
                 if (selectionLoan == 1)
                 {
-
+                    LoanMenu.createNewLoan();
                 }
                 else if (selectionLoan == 2)
                 {
-
+                    LoanMenu.makeALoanPayment();    
                 }
                 else if (selectionLoan == 3)
                 {
-
+                    LoanMenu.closeLoan();
                 }
                 else if (selectionLoan == 4)
                 {
@@ -238,7 +238,7 @@ namespace CUReef
                 }
             }
 
-        }//end of readLoanInput()
+        }//end of readLoanInput function
         public static void serachMenu()
         {
             Console.WriteLine("Welcome to the search menu");
@@ -267,11 +267,11 @@ namespace CUReef
 
                 if (selectionSerach == 1)
                 {
-
+                    SearchMenu.searchAccounts();
                 }
                 else if (selectionSerach == 2)
                 {
-
+                    SearchMenu.searchClient();
                 }
                 else if (selectionSerach == 3)
                 {
@@ -281,10 +281,10 @@ namespace CUReef
                 else
                 {
                     Console.Clear();
-                    Console.WriteLine("Please provide a valid selection from the Search Menu\n\n");
+                    Console.WriteLine("Please provide a valid selection from the Search \n\n");
                     serachMenu();
                 }
             }
-        }//end of readSerachInput()
+        }//end of readSerachInput function
     }//end of class Menus
 }//end of namespace CUReef

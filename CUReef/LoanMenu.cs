@@ -5,9 +5,9 @@ using System.Text;
 
 namespace CUReef
 {
-    class SavingsMenu
+    class LoanMenu
     {
-        public static void createSavingsAccount()
+        public static void createNewLoan()
         {
 
             Queue qthree = MenuInput.openAccount();
@@ -64,55 +64,50 @@ namespace CUReef
             var dob = new DOB(yearOfBirth, monthOfBirth, dayOfBirth);
             var client = new Client(fname, lname, ssn, phone, dob);
             var clientID = client.addClientToDatabase();
-            var checkingPK = client.createSavingsAccount(interestRate);
+            var loanPK = client.createLoan(interestRate);
             var address = new Address(strNumber, strName, aptNumber, city, state, zipCode, clientID);
             address.addAddressToDatabase();
             balance = 0.0m;
-            var svgAcctTransaction = new SavingsTransaction(balance, balance, checkingPK);
-            svgAcctTransaction.openSavingsAccount();
+            var loan = new LoanTransaction(balance, balance, loanPK);
+            loan.openALoan();
 
-        }//end of createSavingsAccount function
-        public static void checkSavingsBalance()
+        }//end of createNewLoan function
+        public static void makeALoanPayment()
         {
+            var loanNumber = new LoanTransaction();
+            int loanAcctNum = MenuInput.CheckBalance();
+            decimal loanBalance = loanNumber.optstandingBalance(loanAcctNum);
+            howMuchYouPay(loanBalance, loanAcctNum);
 
-            var savingsAccount = new SavingsTransaction();
-            int acctId = MenuInput.CheckBalance();
-            decimal bal = savingsAccount.getSavingsAccountBalance(acctId);
-
-            Console.WriteLine($"The Account number: {acctId} has a balance of {bal}");
-
-        }//end of checkSavingsBalance function
-        public static void addBalanceSavings()
+        }//end of makeALoanPayment function
+        public static void closeLoan()
         {
-            (int acctID, decimal addBal) = MenuInput.addBalance();
+            var acctID = MenuInput.closeAccount();
+            var lnNum = new LoanTransaction();
+            decimal outstBal = lnNum.optstandingBalance(acctID);
+            decimal closeBalance = Decimal.Negate(outstBal);
 
-            var savingsAccount = new SavingsTransaction();
-            savingsAccount.addFundstoSavingsAccount(addBal, acctID);
-            decimal balance = savingsAccount.getSavingsAccountBalance(acctID);
+            Console.WriteLine($"The outstanding balance for account number {acctID} is ${outstBal}");
+            lnNum.payLoan(acctID, closeBalance, 0);
+            lnNum.closeLoanAccount(acctID);
+            Console.WriteLine($"Loan number {acctID} is closed!!");
 
-            Console.WriteLine($"You are adding ${addBal} to account number: {acctID}, the new balance of this account is {balance}");
-
-        }//end of addBalanceSavings function
-        public static void removeBalanceSavings()
+        }//end of closeLoan function
+        public static void howMuchYouPay(decimal loanBalance, int loanAcctNum)
         {
-            (int acctID, decimal removeBal) = MenuInput.removeBalance();
+            decimal payment;
+            Console.WriteLine($"The outstanding balance on the loan is: {loanBalance}");
+            Console.WriteLine("How much do you want to pay?: ");
+            payment = Convert.ToDecimal(Console.ReadLine());
 
-            var svgAcct = new SavingsTransaction();
-            svgAcct.addFundstoSavingsAccount(removeBal, acctID);
-            decimal tempBal = svgAcct.getSavingsAccountBalance(acctID);
+            decimal tempBal = loanBalance - payment;
+            decimal invPayment = Decimal.Negate(payment);
 
-            Console.WriteLine($"The new balance of the account number {acctID} is: ${tempBal}");
+            var loanTrans = new LoanTransaction();
+            loanTrans.payLoan(loanAcctNum, invPayment, tempBal);
 
-        }//end of removeBalanceSavings function
-        public static void closeSavingsAccount()
-        {
-            int acctID = MenuInput.closeAccount();
-            var svgAccount = new SavingsTransaction();
-            var balance = svgAccount.closeSavingsAccount(acctID);
+            Console.WriteLine($"A payment of amount ${payment} was applied to the loan.\nThe new Loan balance for accout number {loanAcctNum} is : ${tempBal}");
 
-            Console.WriteLine($"The Account with number: {acctID} has been closed.\nPlease pay the client the remaining balance of: ${balance}");
-
-
-        }//end of close savings account
-    }//end of SavingsMenu Class
+        }//end of howMuchYouPay function
+    }//end of LoanMenu Class
 }//end of CUReef Namespace

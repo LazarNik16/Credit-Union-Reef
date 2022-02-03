@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace CUReef
 {
@@ -22,14 +20,14 @@ namespace CUReef
         }//end of the CheckingTransaction constructor
         public override string ToString()
         {
-            string str = $"The client is adding {Amount} to his account. The balance is {Balance}";
+            string str = $"The client is adding ${Amount} to his account. The balance is {Balance}";
             return str;
 
         }//end of the ToString function
         public void openCheckingAccount()
         {
             string openCkAccount = "INSERT INTO CheckingTransactions (CkTransAmount, CkTransBalance, CKAcctID) VALUES (@CkTransAmount, @CkTransBalance, @CkAcctID)";
-            dbm.OpenNewAccount(openCkAccount, this);
+            dbm.OpenNewCheckingAccount(openCkAccount, this);
 
         }//end of openCheckingAccount
         public decimal getCheckingAccountBalance(int ckAcctPK)
@@ -57,7 +55,7 @@ namespace CUReef
             string closeAcct = "UPDATE CheckingAccounts SET EditDate = getdate(), IsClosed = 1 WHERE CkAcctID = @CkAcctID";
             addFundToAccount(removeBalance, acctID);
             
-            dbm.closeCheckingAccount(closeAcct, removeBalance, acctID);
+            dbm.closeCheckingAccount(closeAcct, acctID);
             return balance;
 
         }//end of closeCkAccont function0

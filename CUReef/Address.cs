@@ -18,6 +18,7 @@ namespace CUReef
         public Address () { }
         public Address(string strNum, string strName, string aptNum, string city, string state, int zipCode, int clientID)
         {
+
             StreetNum = strNum;
             StreetName = strName;
             AptNum = aptNum;
@@ -25,7 +26,8 @@ namespace CUReef
             State = state;
             ZipCode = zipCode;
             ClientID = clientID;
-        }
+
+        }//end of Address constructor
         public override string ToString()
         {
             //addAddressToDatabase();
@@ -39,12 +41,14 @@ namespace CUReef
                 return $"{StreetNum} {StreetName}\n Apt. {AptNum}\n {City}, {State} {ZipCode}";
             }
             
-        }
+        }//end of ToString function
         public void addAddressToDatabase()
         {
+
             string addAddress = "INSERT INTO Addresses (StrNumber, StrName, AptNumber, City, USState, ZipCode, ClientID) VALUES (@StrNumber, @StrName, @AptNumber, @City, @USState, @ZipCode, @ClientID) SELECT CAST(SCOPE_IDENTITY() as INT)";
             dbm = new DBManager();
             dbm.addAddress(addAddress, this);
-        }
-    }
-}
+
+        }//end of addAddressToDatabase function
+    }//end of the Address CLass
+}//end of CUReef Namespace

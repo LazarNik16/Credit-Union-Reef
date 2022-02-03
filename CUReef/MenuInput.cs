@@ -179,17 +179,6 @@ namespace CUReef
             qone.Enqueue(state);
             qone.Enqueue(zipCode);
 
- /*
-            var dob = new DOB(yearOfBirth, monthOfBirth, dayOfBirth);
-            var client = new Client(fname, lname, ssn, phone, dob);
-            var clientID = client.addClientToDatabase();
-            var checkingPK = client.createCheckingAccount();
-            var address = new Address(strNumber, strName, aptNumber, city, state, zipCode, clientID);
-            address.addAddressToDatabase();
-            balance = addBalance();
-            var ckAcctTransaction = new CheckingTransaction(balance, balance, checkingPK);
-            ckAcctTransaction.openCheckingAccount();
- */
             return qone;
 
         }//end of openAccount() function
@@ -285,7 +274,7 @@ namespace CUReef
         {
             Console.Clear();
 
-            Console.WriteLine("Provide the account number for the account to be deleted: ");
+            Console.WriteLine("Provide the account number for the account to be closed: ");
             int acctID = Convert.ToInt32(Console.ReadLine());
 
             return acctID;
