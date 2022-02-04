@@ -400,6 +400,122 @@ namespace CUReef
             printOwner(acct);
 
         }//end of searchLoanNumber function
+        public int searchClientFname(string srcFname, string fname)
+        {
+            int clientid = 0;
+            cmd = new SqlCommand(srcFname, this.connection);
+            cmd.Parameters.AddWithValue("@Fname", fname);
+
+            connection.Open();
+            SqlDataReader rdr = cmd.ExecuteReader();
+
+            if (rdr.HasRows)
+            {
+                while(rdr.Read())
+                {
+                    Console.WriteLine("Client Name: {1} \nClient Lastname: {2} \nSocial Security Number: {3}, \nDate of Birth: {4}, \nPhone: {5}", rdr["ClientID"], rdr["Fname"], rdr["Lname"], rdr["SSN"], rdr["DOB"], rdr["Phone"]);
+                    clientid = (int)rdr["ClientID"];
+                }
+            }
+            connection.Close();
+            return clientid;
+
+        }//end of searchClientFname function
+        public int searchClientLname(string srcClinet, string lname)
+        {
+            int clientId = 0;
+            cmd = new SqlCommand(srcClinet, this.connection);
+            cmd.Parameters.AddWithValue("@Lname", lname);
+
+            connection.Open();
+            SqlDataReader rdr = cmd.ExecuteReader();
+
+            if (rdr.HasRows)
+            {
+                while(rdr.Read())
+                {
+                    Console.WriteLine("Client Name: {1} \nClient Lastname: {2} \nSocial Security Number: {3}, \nDate of Birth: {4}, \nPhone: {5}", rdr["ClientID"], rdr["Fname"], rdr["Lname"], rdr["SSN"], rdr["DOB"], rdr["Phone"]);
+                    clientId = (int)rdr["ClientID"];
+                }
+            }
+            connection.Close();
+            return clientId; 
+
+        }//end of searchClientLname function
+        public int searchClientByPhone(string srcPhone, long phone)
+        {
+            int clientId = 0;
+            cmd = new SqlCommand(srcPhone, this.connection);
+            cmd.Parameters.AddWithValue("@Phone", phone);
+
+            connection.Open();
+            SqlDataReader rdr = cmd.ExecuteReader();
+            if (rdr.HasRows)
+            {
+                while (rdr.Read())
+                {
+                    Console.WriteLine("Client Name: {1} \nClient Lastname: {2} \nSocial Security Number: {3}, \nDate of Birth: {4}, \nPhone: {5}", rdr["ClientID"], rdr["Fname"], rdr["Lname"], rdr["SSN"], rdr["DOB"], rdr["Phone"]);
+                    clientId = (int)rdr["ClientID"];
+                }
+            }
+            connection.Close();
+            return clientId;
+
+        }//end of searchClientByPhone function
+        public void searchCkAccountOnClientId(string srcCkAcct, int clientId)
+        {
+            cmd = new SqlCommand(srcCkAcct, this.connection);
+            cmd.Parameters.AddWithValue("@ClientID", clientId);
+
+            connection.Open();
+            SqlDataReader rdr = cmd.ExecuteReader();
+            
+            if (rdr.HasRows)
+            {
+                while (rdr.Read())
+                {
+                    Console.WriteLine("Checking account number: {0} \nDate Opened: {1} \nIs Closed: {3}", rdr["CkAcctID"], rdr["CreateDate"], rdr["EditDate"], rdr["IsClosed"]);
+                }
+            }
+            connection.Close();
+
+        }//end of searchCkAccountOnClientId function
+        public void searchSvgAccountOnClientId(string srcSvAcct, int clientId)
+        {
+            cmd = new SqlCommand(srcSvAcct, this.connection);
+            cmd.Parameters.AddWithValue("@ClientID", clientId);
+
+            connection.Open();
+            SqlDataReader rdr = cmd.ExecuteReader();
+
+            if (rdr.HasRows)
+            {
+                while(rdr.Read())
+                {
+                    Console.WriteLine("\nSavings account number: {0}\nInterest rate: {1} \nDate Opened: {2} \nIs Closed: {3}", rdr["SvgAcctID"], rdr["InterestRate"], rdr["CreateDate"], rdr["IsClosed"]);
+                }
+            }
+            connection.Close();
+
+        }//end of searchSvgAccountOnClientId
+        public void searchLoanOnClientId(string srcLoan, int clientId)
+        {
+            cmd = new SqlCommand(srcLoan, this.connection);
+            cmd.Parameters.AddWithValue("@ClientID", clientId);
+
+            connection.Open();
+            SqlDataReader rdr = cmd.ExecuteReader();
+
+            if (rdr.HasRows)
+            {
+                while(rdr.Read())
+                {
+                    Console.WriteLine("\nLoan number: {0} \nLoan Rate: {1} \nOpen Date: {2} \nIs Closed {3}", rdr["LoanID"], rdr["LoanIntRate"], rdr["CreateDate"], rdr["IsClosed"]);
+                }
+            }
+            connection.Close();
+
+        }//end of searchLoanOnClientId function
         public void printOwner(int clientID)
         {
             string getOwner = "SELECT ClientID, Fname, Lname, SSN, DOB FROM Clients WHERE ClientID = @ClientID";
@@ -420,6 +536,7 @@ namespace CUReef
             connection.Close();
 
         }//end of printOwner function
+
         public void doIt()
         {
             connection.Open();
