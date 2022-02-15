@@ -55,6 +55,6 @@ namespace CUReef
             dbm.closeSavingsAcct(closeAcct, acctId);
             return bal;
 
-        }//end of closeSavingsAccount function
+        }//end of closeSavingsAccount function        
     }//end of SavingsTransaction Class
 }//end of CUReef Namespace

@@ -62,11 +62,11 @@ namespace CUReef
             return savingAcctID;
 
         }//end of createSavingsAccount function
-        public int createLoan(double intRate)
+        public int createLoan(double intRate, decimal loanAmount, int length, decimal montlyPayment)
         {
 
-            string addLoanAcct = "INSERT INTO Loans (ClientID, LoanIntRate) VALUES (@ClientID, @LoanIntRate) SELECT CAST(SCOPE_IDENTITY() as INT)";
-            loanAcctId = dbm.addNewLoan(addLoanAcct, clientPK, intRate);
+            string addLoanAcct = "INSERT INTO Loans (LoanIntRate, LoanAmount, LoanLength, LoanPayment, ClientID) VALUES (@LoanIntRate, @LoanAmount, @LoanLength, @LoanPayment, @ClientID) SELECT CAST(SCOPE_IDENTITY() as INT)";
+            loanAcctId = dbm.addNewLoan(addLoanAcct, intRate, loanAmount, length, montlyPayment, clientPK); 
 
             return loanAcctId;
 

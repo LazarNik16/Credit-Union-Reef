@@ -30,6 +30,9 @@ namespace CUReef
             Console.WriteLine("Set the interest rate for this savings account: ");
             interestRate = Convert.ToDouble(Console.ReadLine());
 
+            Console.WriteLine("Set the initial balance for this savings account: ");
+            balance = Convert.ToDecimal(Console.ReadLine());
+
             yearOfBirth = (int)qthree.Dequeue();
             monthOfBirth = (int)qthree.Dequeue();
             dayOfBirth = (int)qthree.Dequeue();
@@ -58,7 +61,7 @@ namespace CUReef
                               $"Coty: {city}\n" +
                               $"State: {state}\n" +
                               $"zip code: {zipCode}\n" +
-                              $"finally. Interest rate: {interestRate}");
+                              $"Interest rate: {interestRate}");
 
 
             var dob = new DOB(yearOfBirth, monthOfBirth, dayOfBirth);
@@ -67,14 +70,13 @@ namespace CUReef
             var checkingPK = client.createSavingsAccount(interestRate);
             var address = new Address(strNumber, strName, aptNumber, city, state, zipCode, clientID);
             address.addAddressToDatabase();
-            balance = 0.0m;
+            //balance = 0.0m;
             var svgAcctTransaction = new SavingsTransaction(balance, balance, checkingPK);
             svgAcctTransaction.openSavingsAccount();
 
         }//end of createSavingsAccount function
         public static void checkSavingsBalance()
         {
-
             var savingsAccount = new SavingsTransaction();
             int acctId = MenuInput.CheckBalance();
             decimal bal = savingsAccount.getSavingsAccountBalance(acctId);
@@ -111,7 +113,6 @@ namespace CUReef
             var balance = svgAccount.closeSavingsAccount(acctID);
 
             Console.WriteLine($"The Account with number: {acctID} has been closed.\nPlease pay the client the remaining balance of: ${balance}");
-
 
         }//end of close savings account
     }//end of SavingsMenu Class

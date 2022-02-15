@@ -28,13 +28,20 @@ namespace CUReef
             dbm.openNewLoan(openloan, this);
 
         }//end of openALoan function
-        public decimal optstandingBalance(int acctID)
+        public decimal[] optstandingBalance(int acctID)
         {
-           
+            decimal [] numbers = new decimal[2];
+
             string checkBalance = "SELECT LoanTransBalance FROM LoanTransactions WHERE LoanTransDate = (SELECT MAX(LoanTransDate) FROM LoanTransactions WHERE LoanID = @LoanID)";
             Balance = dbm.getLoanBalance(checkBalance, acctID);
 
-            return Balance;
+            decimal suggestedPayment;
+            string checkRatePayment = "SELECT LoanPayment from Loans WHERE LoanID = @LoanID";
+            suggestedPayment = dbm.suggestedLoanPayment(checkRatePayment, acctID);
+            numbers[0] = Balance;
+            numbers[1] = suggestedPayment;
+
+            return numbers;
 
         }//end of outstandingBalance
         public void payLoan(int acct, decimal payment, decimal balance)

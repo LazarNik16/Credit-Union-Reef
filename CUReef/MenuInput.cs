@@ -23,7 +23,6 @@ namespace CUReef
             int monthOfBirth;
             int dayOfBirth;
             int yearOfBirth;
-            //decimal balance;
 
             Queue qone = new Queue();
 

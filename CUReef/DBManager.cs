@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -13,7 +14,10 @@ namespace CUReef
         int pkCheckingAccount = 0;
         int pkSavingsaccount = 0;
         int pkLoan = 0;
-        decimal acctBalance = 0;
+        decimal acctBalance = 0.0m;
+        decimal suggestedPayment = 0.0m;
+
+        public SqlDataReader SqlDataReader { get; private set; }
 
         public DBManager()
         {
@@ -244,14 +248,17 @@ namespace CUReef
                 Console.WriteLine("Error code " + e);
             }
         }//end of closeSavingsAcct function
-        public int addNewLoan(string addLoan, int clientPK, double intRate)
+        public int addNewLoan(string addLoan, double intRate, decimal loanAmount, int loanLength, decimal loanPayment, int clientPK)
         {
             try
             {
                 cmd = new SqlCommand(addLoan, this.connection);
 
-                cmd.Parameters.AddWithValue("@ClientID", clientPK);
                 cmd.Parameters.AddWithValue("@LoanIntRate", intRate);
+                cmd.Parameters.AddWithValue("@LoanAmount", loanAmount);
+                cmd.Parameters.AddWithValue("@LoanLength", loanLength);
+                cmd.Parameters.AddWithValue("@LoanPayment", loanPayment);
+                cmd.Parameters.AddWithValue("@ClientID", clientPK);
 
                 connection.Open();
                 pkLoan = Convert.ToInt32(cmd.ExecuteScalar());
@@ -319,6 +326,24 @@ namespace CUReef
                 Console.WriteLine("Error code " + e);
             }
         }//end of payLoanAdHoc function
+        public decimal suggestedLoanPayment(string checkPayment, int acctID)
+        {
+            try
+            {
+                cmd = new SqlCommand(checkPayment, this.connection);
+                cmd.Parameters.AddWithValue("@LoanID", acctID);
+
+                connection.Open();
+                suggestedPayment = Convert.ToDecimal(cmd.ExecuteScalar());
+                connection.Close();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error code " + e);
+            }
+            return suggestedPayment;
+
+        }//end of suggestedLoanPayment function
         public void closeLoan(string closeLoan, int acctID)
         {
             
@@ -536,7 +561,6 @@ namespace CUReef
             connection.Close();
 
         }//end of printOwner function
-
         public void doIt()
         {
             connection.Open();
