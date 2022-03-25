@@ -70,7 +70,6 @@ namespace CUReef
             var checkingPK = client.createSavingsAccount(interestRate);
             var address = new Address(strNumber, strName, aptNumber, city, state, zipCode, clientID);
             address.addAddressToDatabase();
-            //balance = 0.0m;
             var svgAcctTransaction = new SavingsTransaction(balance, balance, checkingPK);
             svgAcctTransaction.openSavingsAccount();
 

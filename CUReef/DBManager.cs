@@ -60,7 +60,7 @@ namespace CUReef
                 cmd.Parameters.AddWithValue("@StrName", address.StreetName);
                 cmd.Parameters.AddWithValue("@AptNumber", address.AptNum);
                 cmd.Parameters.AddWithValue("@City", address.City);
-                cmd.Parameters.AddWithValue("@USState", address.State);
+                cmd.Parameters.AddWithValue("@State", address.State);
                 cmd.Parameters.AddWithValue("@ZipCode", address.ZipCode);
                 cmd.Parameters.AddWithValue("@ClientID", address.ClientID);
 

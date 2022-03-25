@@ -7,12 +7,13 @@ namespace CUReef
 {
     class LoanMenu
     {
-
         public static void createNewLoan()
         {
 
             Queue qthree = MenuInput.openAccount();
-
+            int yearOfBirth = (int)qthree.Dequeue();
+            int monthOfBirth = (int)qthree.Dequeue();
+            int dayOfBirth = (int)qthree.Dequeue();
             string fname = (string)qthree.Dequeue();
             string lname = (string)qthree.Dequeue();
             long ssn = (long)qthree.Dequeue();
@@ -23,15 +24,12 @@ namespace CUReef
             string city = (string)qthree.Dequeue();
             string state = (string)qthree.Dequeue();
             int zipCode = (int)qthree.Dequeue();
-            int monthOfBirth = (int)qthree.Dequeue();
-            int dayOfBirth = (int)qthree.Dequeue();
-            int yearOfBirth = (int)qthree.Dequeue();
+            
+
             decimal loanAmt = loanAmount();
             double intrRate = loanInterestRate();
             int length = loanLength();
-            decimal monthlyPmt = loanMontlyPayment();
-
-
+            decimal monthlyPmt = loanMontlyPayment(loanAmt, intrRate, length);
 
             Console.WriteLine($"Printing in order\n" +
                               $"Year of Birth: {yearOfBirth}\n" +
@@ -47,7 +45,6 @@ namespace CUReef
                               $"Coty: {city}\n" +
                               $"State: {state}\n" +
                               $"zip code: {zipCode}");
-
 
             var dob = new DOB(yearOfBirth, monthOfBirth, dayOfBirth);
             var client = new Client(fname, lname, ssn, phone, dob);
@@ -65,7 +62,6 @@ namespace CUReef
             var loanNumber = new LoanTransaction();
             int loanAcctNum = MenuInput.CheckBalance();
             numbers = loanNumber.optstandingBalance(loanAcctNum);
-
 
             howMuchYouPay(numbers[0], numbers[1], loanAcctNum);
 
@@ -125,14 +121,12 @@ namespace CUReef
             return loanLength;
 
         }//end of loanLength function
-        public static decimal loanMontlyPayment()
+        public static decimal loanMontlyPayment(decimal loanAmt, double intrRate, int length)
         {
-            decimal amount = loanAmount();
-            double r = loanInterestRate()/1200;
-            int length = loanLength();
+            double r = intrRate/1200;
             double f = Math.Pow(1 + r, length);
 
-            return (amount * (decimal)(r * f / (-1 + f)));
+            return (loanAmt * (decimal)(r * f / (-1 + f)));
 
         }//end of oanMontlyPayment function
     }//end of LoanMenu Class

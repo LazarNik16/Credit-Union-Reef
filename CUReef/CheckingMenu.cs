@@ -24,7 +24,6 @@ namespace CUReef
                int monthOfBirth;
                int dayOfBirth;
                int yearOfBirth;
-               decimal balance;
 
             yearOfBirth = (int)qtwo.Dequeue();
             monthOfBirth = (int)qtwo.Dequeue();
@@ -61,9 +60,6 @@ namespace CUReef
             var checkingPK = client.createCheckingAccount();
             var address = new Address(strNumber, strName, aptNumber, city, state, zipCode, clientID);
             address.addAddressToDatabase();
-            balance = 0.0m;
-            var svgTransaction = new SavingsTransaction(balance, balance, checkingPK);
-            svgTransaction.openSavingsAccount();
 
         }//end of openCheckingAccount function
         public static void checkCheckingBalance()
@@ -114,7 +110,3 @@ namespace CUReef
         }//end of the closeCheckingAccount function
     }//end of CheckingMenu Class
  }//end of CUReef Namespace
-
-
-
-       

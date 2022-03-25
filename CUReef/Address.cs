@@ -14,7 +14,6 @@ namespace CUReef
 
         DBManager dbm = new DBManager();
 
-
         public Address () { }
         public Address(string strNum, string strName, string aptNum, string city, string state, int zipCode, int clientID)
         {
@@ -45,7 +44,7 @@ namespace CUReef
         public void addAddressToDatabase()
         {
 
-            string addAddress = "INSERT INTO Addresses (StrNumber, StrName, AptNumber, City, USState, ZipCode, ClientID) VALUES (@StrNumber, @StrName, @AptNumber, @City, @USState, @ZipCode, @ClientID) SELECT CAST(SCOPE_IDENTITY() as INT)";
+            string addAddress = "INSERT INTO Addresses (StrNumber, StrName, AptNumber, City, State, ZipCode, ClientID) VALUES (@StrNumber, @StrName, @AptNumber, @City, @State, @ZipCode, @ClientID) SELECT CAST(SCOPE_IDENTITY() as INT)";
             dbm = new DBManager();
             dbm.addAddress(addAddress, this);
 
